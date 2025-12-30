@@ -1,6 +1,10 @@
 <div align="center">
 <img width="1200" height="475" alt="GHBanner" src="https://github.com/aswathi-123-droid/OPERATION-GREEN-SLEIGH/blob/main/Screenshot%202025-12-30%20193039.png" />
 </div>
+<div align="center">
+<img width="1200" height="475" alt="GHBanner" src="https://github.com/aswathi-123-droid/OPERATION-GREEN-SLEIGH/blob/main/Screenshot%202025-12-30%20193105.png" />
+</div>
+
 
 # 🎅 Operation Green Sleigh: Santa's Eco-Command Center
 
