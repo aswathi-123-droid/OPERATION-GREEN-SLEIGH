@@ -417,8 +417,8 @@ const GlobalMap: React.FC<GlobalMapProps> = ({ missions, onLocationSelect }) => 
        
        <div className="absolute bottom-6 left-6 pointer-events-none">
           <div className="text-white/70 text-[10px] font-mono max-w-xs bg-slate-900/60 p-3 rounded border border-white/5 backdrop-blur-sm">
-             >> INTERACTIVE MODE ENABLED<br/>
-             >> CLICK TARGET ZONE TO DEPLOY
+             &gt;&gt; INTERACTIVE MODE ENABLED<br/>
+             &gt;&gt; CLICK TARGET ZONE TO DEPLOY
           </div>
        </div>
 
