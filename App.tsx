@@ -4,14 +4,12 @@ import { fetchMissions, createMission, updateMissionStatus, deleteMission } from
 import MissionCard from './components/MissionCard';
 import StatsPanel from './components/StatsPanel';
 import GlobalMap from './components/GlobalMap';
-import { Radar, Plus, Terminal, Snowflake, Key, X, Sparkles, Bell, Gift, MapPin } from 'lucide-react';
+import { Radar, Plus, Terminal, Snowflake, X, Sparkles, Bell, Gift, MapPin } from 'lucide-react';
 import gsap from 'gsap';
 
 const App: React.FC = () => {
   const [missions, setMissions] = useState<Mission[]>([]);
   const [loading, setLoading] = useState(true);
-  const [apiKey, setApiKey] = useState<string>('');
-  const [showApiKeyModal, setShowApiKeyModal] = useState(false);
   const [showAddModal, setShowAddModal] = useState(false);
 
   // Refs for animation
@@ -29,12 +27,6 @@ const App: React.FC = () => {
   const [newMissionLevel, setNewMissionLevel] = useState<PollutionLevel>('Medium');
   const [newMissionSafe, setNewMissionSafe] = useState(false);
   const [newMissionCoords, setNewMissionCoords] = useState<{lat: number, lon: number} | undefined>(undefined);
-
-  useEffect(() => {
-    if (process.env.API_KEY) {
-      setApiKey(process.env.API_KEY);
-    }
-  }, []);
 
   const loadData = useCallback(async () => {
     setLoading(true);
@@ -207,18 +199,10 @@ const App: React.FC = () => {
               <h1 className="text-2xl font-black tracking-wider font-orbitron text-slate-900">
                 OPERATION <span className="festive-gradient-text">GREEN SLEIGH</span>
               </h1>
-              <p className="text-xs font-bold text-slate-400 tracking-[0.3em] uppercase">Santa's Eco-Command v2.0</p>
+              <p className="text-xs font-bold text-slate-400 tracking-[0.3em] uppercase">Santa's Eco-Command v2.1</p>
             </div>
           </div>
           <div className="flex items-center gap-4">
-             {!apiKey && (
-              <button 
-                onClick={() => setShowApiKeyModal(true)}
-                className="hidden md:flex items-center gap-2 text-slate-600 text-xs font-bold bg-white border border-slate-200 px-4 py-2 rounded-full hover:bg-slate-50 hover:shadow-md transition-all"
-              >
-                <Key className="w-3 h-3 text-red-500" /> API KEY REQUIRED
-              </button>
-            )}
             <div className="flex items-center gap-2 text-xs font-bold text-slate-500 bg-slate-100 px-3 py-1.5 rounded-full">
               <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
               SYSTEM ONLINE
@@ -268,10 +252,8 @@ const App: React.FC = () => {
                 <MissionCard 
                   key={mission._id} 
                   mission={mission}
-                  apiKey={apiKey}
                   onUpdateStatus={handleUpdateStatus}
                   onDelete={handleDelete}
-                  onRequestApiKey={() => setShowApiKeyModal(true)}
                 />
               ))}
               {missions.length === 0 && (
@@ -285,42 +267,6 @@ const App: React.FC = () => {
           )}
         </div>
       </main>
-
-      {/* API Key Modal */}
-      {showApiKeyModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/40 backdrop-blur-md p-4">
-          <div className="bg-white p-8 rounded-3xl max-w-md w-full shadow-2xl animate-[scaleIn_0.3s_ease-out]">
-            <h3 className="text-xl font-black text-slate-900 mb-4 font-orbitron flex items-center gap-2">
-              <Key className="w-6 h-6 text-yellow-500" /> Security Clearance
-            </h3>
-            <p className="text-slate-600 text-sm mb-6 leading-relaxed">
-              Enter your Google Gemini API Key to enable Tactical AI Analysis. 
-              This connects Santa's sleigh directly to the neural mainframe.
-            </p>
-            <input 
-              type="password" 
-              placeholder="Paste API Key here..."
-              value={apiKey}
-              onChange={(e) => setApiKey(e.target.value)}
-              className="w-full bg-slate-50 border border-slate-200 rounded-xl p-4 text-slate-800 mb-4 focus:border-red-500 focus:ring-2 focus:ring-red-100 outline-none transition-all font-mono text-sm"
-            />
-            <div className="flex justify-end gap-3">
-              <button 
-                onClick={() => setShowApiKeyModal(false)}
-                className="px-6 py-3 text-slate-500 font-bold hover:text-slate-800 transition-colors"
-              >
-                Close
-              </button>
-              <button 
-                onClick={() => setShowApiKeyModal(false)}
-                className="bg-yellow-500 hover:bg-yellow-400 text-white font-bold px-8 py-3 rounded-xl shadow-lg shadow-yellow-500/30 transition-transform active:scale-95"
-              >
-                Authenticate
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* NEW MISSION MODAL (White/Red/Green Theme) */}
       {showAddModal && (

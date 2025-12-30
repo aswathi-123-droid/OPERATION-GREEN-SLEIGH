@@ -1,11 +1,3 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/aswathi-123-droid/OPERATION-GREEN-SLEIGH/blob/main/Screenshot%202025-12-30%20193039.png" />
-</div>
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/aswathi-123-droid/OPERATION-GREEN-SLEIGH/blob/main/Screenshot%202025-12-30%20193105.png" />
-</div>
-
-
 # 🎅 Operation Green Sleigh: Santa's Eco-Command Center
 
 **"Saving Christmas, one recycled bottle at a time."**
@@ -16,8 +8,7 @@
 ## ✨ Key Features
 
 *   **🌐 3D Global Pollution Map:** An interactive WebGL globe (powered by **Three.js**) allowing Santa to pinpoint pollution sectors and launch missions directly from orbit.
-*   **🤖 AI Tactical Analysis:** Integrated **Google Gemini API** to analyze waste types and generate military-grade (yet jolly) cleaning protocols.
-*   **🎅 Interactive Cyber-Santa:** A lively, animated Santa avatar that hops around the screen and provides real-time, AI-generated voice status updates based on current mission stats.
+*   **🤖 Tactical Mission Protocols:** Automated tactical analysis system that generates military-grade (yet jolly) cleaning directives for deployed elves.
 *   **📊 Live Stats Panel:** Real-time tracking of active threats, deployed elves, and sectors secured.
 *   **🎨 Cyber-Christmas Aesthetic:** A stunning "Glassmorphism" UI with neon accents, dynamic animations, and a festive dark mode.
 
@@ -26,7 +17,6 @@
 *   **Frontend:** React 18, Vite, Tailwind CSS
 *   **3D Graphics:** Three.js, React Three Fiber
 *   **Animations:** GSAP (GreenSock)
-*   **AI Intelligence:** Google Gemini API (`gemini-3-flash-preview`)
 *   **Icons:** Lucide React
 
 ## 🚀 Getting Started
@@ -34,7 +24,6 @@
 1.  **Clone the repo**
 2.  **Install dependencies:** `npm install`
 3.  **Run the dev server:** `npm run dev`
-4.  **Authenticate:** Enter your Gemini API Key to enable Santa's Tactical AI.
 
 ---
 *Built for the Hackathon to keep the North Pole green and clean.* 🎄♻️

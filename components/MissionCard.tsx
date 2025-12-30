@@ -2,18 +2,15 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Mission, MissionStatus } from '../types';
 import { ShieldAlert, Zap, UserCheck, CheckCircle, Trash2, Radio, Sparkles, MapPin, Gift, Bot, AlertTriangle } from 'lucide-react';
 import { ELVES } from '../constants';
-import { analyzeMission } from '../services/geminiService';
 import gsap from 'gsap';
 
 interface MissionCardProps {
   mission: Mission;
-  apiKey: string;
   onUpdateStatus: (id: string, status: MissionStatus, elf?: string) => void;
   onDelete: (id: string) => void;
-  onRequestApiKey: () => void;
 }
 
-const MissionCard: React.FC<MissionCardProps> = ({ mission, apiKey, onUpdateStatus, onDelete, onRequestApiKey }) => {
+const MissionCard: React.FC<MissionCardProps> = ({ mission, onUpdateStatus, onDelete }) => {
   const [selectedElf, setSelectedElf] = useState(ELVES[0]);
   const [analysis, setAnalysis] = useState<string | null>(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
@@ -44,11 +41,6 @@ const MissionCard: React.FC<MissionCardProps> = ({ mission, apiKey, onUpdateStat
   };
 
   const handleAnalyze = async () => {
-    if (!apiKey) {
-      onRequestApiKey();
-      return;
-    }
-    
     // Toggle close if already open
     if (analysis) {
         setAnalysis(null);
@@ -56,15 +48,24 @@ const MissionCard: React.FC<MissionCardProps> = ({ mission, apiKey, onUpdateStat
     }
 
     setIsAnalyzing(true);
-    try {
-      const result = await analyzeMission(mission, apiKey);
-      setAnalysis(result);
-    } catch (err) {
-      console.error(err);
-      setAnalysis("Error: Tactical Link Unstable. Reindeer interference detected.");
-    } finally {
-      setIsAnalyzing(false);
-    }
+    
+    // Simulate API Delay
+    setTimeout(() => {
+        const protocols = [
+          "Deploy biodegradable glitter countermeasures.",
+          "Activate Reindeer Shielding Protocol Alpha.",
+          "Utilize candy-cane grappling hooks for waste retrieval.",
+          "Dispatch Snow-Bot unit for heavy lifting.",
+          "Neutralize toxins with peppermint extract.",
+          "Engage Silent Night cleaning mode."
+        ];
+        const randomProtocol = protocols[Math.floor(Math.random() * protocols.length)];
+        
+        const generatedAnalysis = `TARGET: ${mission.sector}\nHAZARD: ${mission.wasteType}\nDIRECTIVE: ${randomProtocol}\nSTATUS: Priority Level ${mission.pollutionLevel}`;
+        
+        setAnalysis(generatedAnalysis);
+        setIsAnalyzing(false);
+    }, 1000);
   };
 
   // Animate the analysis box when it opens
@@ -147,7 +148,7 @@ const MissionCard: React.FC<MissionCardProps> = ({ mission, apiKey, onUpdateStat
                 : analysis ? 'bg-indigo-500 text-white rotate-0' 
                 : 'bg-indigo-50 text-indigo-500 hover:bg-indigo-500 hover:text-white hover:rotate-12'
               }`}
-              title="AI Tactical Analysis"
+              title="Tactical Analysis"
               disabled={isAnalyzing}
             >
               <Bot className="w-4 h-4" />
@@ -192,7 +193,7 @@ const MissionCard: React.FC<MissionCardProps> = ({ mission, apiKey, onUpdateStat
              <p className="text-slate-700 font-medium text-sm relative z-10">{mission.wasteType}</p>
           </div>
           
-          {/* Embedded AI Analysis Window */}
+          {/* Simulated Tactical Analysis Window */}
           {analysis && (
             <div ref={analysisRef} className="overflow-hidden bg-gradient-to-br from-indigo-50 to-indigo-100/50 rounded-2xl border border-indigo-100 relative">
                <div className="px-4 py-2 border-b border-indigo-100 flex items-center gap-2 bg-white/50">
@@ -200,7 +201,7 @@ const MissionCard: React.FC<MissionCardProps> = ({ mission, apiKey, onUpdateStat
                   <span className="text-[10px] font-bold text-indigo-400 tracking-widest uppercase flex-1">Krampus-01 Tactical</span>
                   <div className="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-pulse"></div>
                </div>
-               <div className="p-4 text-sm text-slate-700 font-mono leading-relaxed relative">
+               <div className="p-4 text-sm text-slate-700 font-mono leading-relaxed relative whitespace-pre-wrap">
                    <p>{analysis}</p>
                    {/* Decoration */}
                    <div className="absolute bottom-2 right-2 opacity-10">
